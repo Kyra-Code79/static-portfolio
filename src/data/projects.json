@@ -1,0 +1,45 @@
+{
+  "projects": [
+    {
+      "title": "Enterprise Information System",
+      "description": "A comprehensive web-based information system for managing attendance, field reports, and operations across multiple branches with role-based access control.",
+      "tags": ["PHP", "CodeIgniter 4", "Flutter", "MySQL", "REST API"],
+      "image": "",
+      "liveUrl": "",
+      "repoUrl": "",
+      "featured": true,
+      "nda": true
+    },
+    {
+      "title": "GIS & Mapping Dashboard",
+      "description": "Interactive geographic information system with polygon mapping, SHP file uploads, and spatial data visualization for field asset management.",
+      "tags": ["PHP", "Leaflet.js", "PostgreSQL", "GeoJSON"],
+      "image": "",
+      "liveUrl": "",
+      "repoUrl": "",
+      "featured": true,
+      "nda": true
+    },
+    {
+      "title": "Mobile Field App",
+      "description": "Cross-platform mobile application for field employees with GPS tracking, photo verification, offline support, and real-time data synchronization.",
+      "tags": ["Flutter", "Dart", "Firebase", "REST API"],
+      "image": "",
+      "liveUrl": "",
+      "repoUrl": "",
+      "featured": false,
+      "nda": true
+    },
+    {
+      "title": "Portfolio Website",
+      "description": "This very site! A modern, responsive portfolio built with Vite and vanilla technologies featuring glassmorphism design, particle effects, and smooth animations.",
+      "tags": ["HTML5", "CSS3", "JavaScript", "Vite"],
+      "image": "",
+      "liveUrl": "#",
+      "repoUrl": "https://github.com/Kyra-Code79",
+      "featured": false,
+      "nda": false
+    }
+  ],
+  "ndaNotice": "Most of my professional work is under NDA. Project details shown are generalized descriptions without revealing confidential information."
+}

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Habibi — Full-Stack Developer. Building modern, performant, and beautiful web & mobile applications." />
+  <meta name="keywords" content="portfolio, full-stack developer, web developer, front-end, back-end, flutter" />
+  <meta name="author" content="Habibi" />
+  <title>Habibi — Full-Stack Developer Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <!-- Cursor glow effect -->
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <!-- Particle background -->
+  <canvas id="particleCanvas"></canvas>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="nav-logo">
+        <span class="logo-bracket">&lt;</span>
+        <span class="logo-text">Habibi</span>
+        <span class="logo-bracket">/&gt;</span>
+      </a>
+      <ul class="nav-menu" id="navMenu">
+        <!-- Populated by JS -->
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+      <div class="hero-container">
+        <div class="hero-content">
+          <div class="hero-badge animate-on-scroll">
+            <span class="badge-dot"></span>
+            <span>Available for new projects</span>
+          </div>
+          <h1 class="hero-title animate-on-scroll">
+            Hi, I'm <span class="gradient-text" id="heroName">Habibi</span>
+          </h1>
+          <p class="hero-role animate-on-scroll" id="heroRole">Full-Stack Developer</p>
+          <p class="hero-description animate-on-scroll" id="heroTagline">
+            Crafting modern digital experiences with clean code and creative design.
+          </p>
+          <div class="hero-cta animate-on-scroll">
+            <a href="#projects" class="btn btn-primary">
+              <span>View My Work</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+            <a href="#contact" class="btn btn-outline">
+              <span>Get In Touch</span>
+            </a>
+          </div>
+          <div class="hero-social animate-on-scroll" id="heroSocial">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+        <div class="hero-visual animate-on-scroll">
+          <div class="hero-code-card glass-card">
+            <div class="code-header">
+              <span class="code-dot red"></span>
+              <span class="code-dot yellow"></span>
+              <span class="code-dot green"></span>
+              <span class="code-filename">about.js</span>
+            </div>
+            <pre class="code-body"><code><span class="code-keyword">const</span> <span class="code-variable">developer</span> = {
+  <span class="code-property">name</span>: <span class="code-string">"M Habibi Siregar"</span>,
+  <span class="code-property">role</span>: <span class="code-string">"Full-Stack Dev"</span>,
+  <span class="code-property">skills</span>: [
+    <span class="code-string">"PHP / CI4"</span>,
+    <span class="code-string">"JavaScript"</span>,
+    <span class="code-string">"Flutter"</span>,
+    <span class="code-string">"TypeScript"</span>
+  ],
+  <span class="code-property">passion</span>: <span class="code-string">"Building dreams"</span>,
+  <span class="code-property">coffee</span>: <span class="code-keyword">Infinity</span> ☕
+};</code></pre>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-indicator">
+        <div class="scroll-mouse">
+          <div class="scroll-wheel"></div>
+        </div>
+        <span>Scroll Down</span>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about-section" id="about">
+      <div class="container">
+        <div class="section-header animate-on-scroll">
+          <span class="section-label">Get to know me</span>
+          <h2 class="section-title">About <span class="gradient-text">Me</span></h2>
+        </div>
+        <div class="about-grid">
+          <div class="about-text animate-on-scroll">
+            <p id="aboutDescription"></p>
+            <ul class="about-details" id="aboutDetails">
+              <!-- Populated by JS -->
+            </ul>
+          </div>
+          <div class="about-stats animate-on-scroll">
+            <div class="stat-card glass-card">
+              <span class="stat-number">3+</span>
+              <span class="stat-label">Years Experience</span>
+            </div>
+            <div class="stat-card glass-card">
+              <span class="stat-number">🔒</span>
+              <span class="stat-label">Mostly NDA Projects</span>
+            </div>
+            <div class="stat-card glass-card">
+              <span class="stat-number">5+</span>
+              <span class="stat-label">Tech Stacks</span>
+            </div>
+            <div class="stat-card glass-card">
+              <span class="stat-number">∞</span>
+              <span class="stat-label">Cups of Coffee</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section skills-section" id="skills">
+      <div class="container">
+        <div class="section-header animate-on-scroll">
+          <span class="section-label">What I know</span>
+          <h2 class="section-title">My <span class="gradient-text">Skills</span></h2>
+        </div>
+        <div class="skills-grid" id="skillsGrid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section projects-section" id="projects">
+      <div class="container">
+        <div class="section-header animate-on-scroll">
+          <span class="section-label">My recent work</span>
+          <h2 class="section-title">Featured <span class="gradient-text">Projects</span></h2>
+        </div>
+        <div class="projects-filter animate-on-scroll">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="featured">Featured</button>
+        </div>
+        <div class="projects-grid" id="projectsGrid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact-section" id="contact">
+      <div class="container">
+        <div class="section-header animate-on-scroll">
+          <span class="section-label">Let's talk</span>
+          <h2 class="section-title">Get In <span class="gradient-text">Touch</span></h2>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-info animate-on-scroll">
+            <p class="contact-description">
+              I'm always interested in hearing about new projects and opportunities.
+              Whether you have a question or just want to say hi, feel free to reach out!
+            </p>
+            <div class="contact-links" id="contactLinks">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+          <form class="contact-form glass-card animate-on-scroll" id="contactForm">
+            <div class="form-group">
+              <label for="contactName">Name</label>
+              <input type="text" id="contactName" name="name" placeholder="Your Name" required />
+            </div>
+            <div class="form-group">
+              <label for="contactEmail">Email</label>
+              <input type="email" id="contactEmail" name="email" placeholder="your@email.com" required />
+            </div>
+            <div class="form-group">
+              <label for="contactMessage">Message</label>
+              <textarea id="contactMessage" name="message" rows="5" placeholder="Your message..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full">
+              <span>Send Message</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <a href="#hero" class="footer-logo">
+          <span class="logo-bracket">&lt;</span>
+          <span class="logo-text">Habibi</span>
+          <span class="logo-bracket">/&gt;</span>
+        </a>
+        <p class="footer-text">
+          &copy; <span id="footerYear"></span> Habibi. Built with ☕ and Vite.
+        </p>
+        <div class="footer-social" id="footerSocial">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "name": "M Habibi Siregar",
+  "title": "Full-Stack Developer",
+  "tagline": "Crafting modern digital experiences with clean code and creative design.",
+  "heroSubtitle": "I build performant, responsive, and visually stunning web applications.",
+  "about": {
+    "description": "I'm a passionate Full-Stack Developer with a strong focus on building modern, scalable, and user-friendly web applications. With experience spanning front-end frameworks, back-end architectures, and mobile development, I love turning complex problems into elegant solutions.",
+    "details": [
+      "Based in Indonesia 🇮🇩",
+      "Open to freelance & collaboration",
+      "Always learning new technologies",
+      "Cat Lover — Orange Cat 🐱🧡"
+    ]
+  },
+  "social": {
+    "github": "https://github.com/Kyra-Code79",
+    "linkedin": "https://www.linkedin.com/in/habibisiregar79/",
+    "email": "kyra@duck.com",
+    "instagram": "https://www.instagram.com/habibisiregar79/"
+  }
+}
