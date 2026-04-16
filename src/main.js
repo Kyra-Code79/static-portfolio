@@ -325,7 +325,7 @@ function showToast(message, type = 'success') {
   setTimeout(() => {
     toast.classList.remove('visible');
     setTimeout(() => toast.remove(), 400);
-  }, 4000);
+  }, 6000);
 }
 
 /* ---------- Navbar Scroll & Active States ---------- */
@@ -571,6 +571,90 @@ function initConsoleMessage() {
   );
 }
 
+/* ---------- Floating Music Player ---------- */
+function initMusicPlayer() {
+  const btn = document.getElementById('musicBtn');
+  const audio = document.getElementById('bgMusic');
+  const volumeRange = document.getElementById('volumeRange');
+  const volumeLabel = document.getElementById('volumeLabel');
+  let isPlaying = false;
+  let isLoaded = false;
+
+  const musicUrl = profileData.music || '/bgm.mp3';
+  const defaultVolume = 0.05;
+
+  function loadAndPlay() {
+    if (!isLoaded) {
+      audio.src = musicUrl;
+      audio.volume = defaultVolume;
+      volumeRange.value = defaultVolume * 100;
+      volumeLabel.textContent = `${Math.round(defaultVolume * 100)}%`;
+      isLoaded = true;
+    }
+    if (!isPlaying) {
+      audio.play().then(() => {
+        isPlaying = true;
+        btn.classList.add('playing');
+      }).catch(() => {
+        // Browser blocked autoplay — wait for user interaction
+        const playOnInteraction = () => {
+          audio.play().then(() => {
+            isPlaying = true;
+            btn.classList.add('playing');
+          }).catch(() => {});
+          document.removeEventListener('click', playOnInteraction);
+          document.removeEventListener('scroll', playOnInteraction);
+          document.removeEventListener('keydown', playOnInteraction);
+        };
+        document.addEventListener('click', playOnInteraction, { once: true });
+        document.addEventListener('scroll', playOnInteraction, { once: true });
+        document.addEventListener('keydown', playOnInteraction, { once: true });
+      });
+    }
+  }
+
+  // Auto-play after 5 seconds
+  setTimeout(loadAndPlay, 5000);
+
+  // Volume slider control
+  volumeRange.addEventListener('input', (e) => {
+    const vol = e.target.value / 100;
+    audio.volume = vol;
+    volumeLabel.textContent = `${e.target.value}%`;
+  });
+
+  // Manual toggle
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (!isLoaded) {
+      audio.src = musicUrl;
+      audio.volume = defaultVolume;
+      volumeRange.value = defaultVolume * 100;
+      volumeLabel.textContent = `${Math.round(defaultVolume * 100)}%`;
+      isLoaded = true;
+    }
+
+    if (isPlaying) {
+      audio.pause();
+      btn.classList.remove('playing');
+      isPlaying = false;
+    } else {
+      audio.play().catch(() => {
+        showToast('⚠️ Add a music file to public/bgm.mp3', 'error');
+      });
+      btn.classList.add('playing');
+      isPlaying = true;
+    }
+  });
+
+  audio.addEventListener('pause', () => {
+    if (!audio.loop) {
+      isPlaying = false;
+      btn.classList.remove('playing');
+    }
+  });
+}
+
 /* ---------- Initialize App ---------- */
 function init() {
   initConsoleMessage();
@@ -590,6 +674,7 @@ function init() {
     initCursorGlow();
     initParticles();
     initTypingEffect();
+    initMusicPlayer();
   });
 }
 

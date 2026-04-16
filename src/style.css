@@ -1055,6 +1055,180 @@ input, textarea {
   gap: 0.75rem;
 }
 
+.footer-music-credit {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  opacity: 0.5;
+  margin-top: 0.25rem;
+}
+
+.footer-music-credit a {
+  color: var(--text-muted);
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  transition: color var(--transition-fast);
+}
+
+.footer-music-credit a:hover {
+  color: var(--text-accent);
+}
+
+/* =============================================
+   FLOATING MUSIC BUTTON
+   ============================================= */
+.music-player {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.music-btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-smooth);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.music-btn:hover {
+  transform: scale(1.1);
+  border-color: var(--accent-primary);
+  box-shadow: 0 4px 25px rgba(124, 58, 237, 0.3);
+}
+
+.music-btn.playing {
+  border-color: var(--accent-primary);
+  animation: music-glow 2s ease-in-out infinite;
+}
+
+@keyframes music-glow {
+  0%, 100% { box-shadow: 0 4px 20px rgba(124, 58, 237, 0.2); }
+  50% { box-shadow: 0 4px 30px rgba(124, 58, 237, 0.5); }
+}
+
+.music-icon {
+  font-size: 1.3rem;
+  transition: opacity 0.3s ease;
+}
+
+.music-btn.playing .music-icon {
+  display: none;
+}
+
+/* Equalizer bars */
+.music-bars {
+  display: none;
+  align-items: flex-end;
+  gap: 3px;
+  height: 18px;
+}
+
+.music-btn.playing .music-bars {
+  display: flex;
+}
+
+.music-bars .bar {
+  width: 3px;
+  background: var(--gradient-primary);
+  border-radius: 2px;
+  animation: eq-bar 1s ease-in-out infinite;
+}
+
+.music-bars .bar:nth-child(1) { height: 60%; animation-delay: 0s; }
+.music-bars .bar:nth-child(2) { height: 100%; animation-delay: 0.15s; }
+.music-bars .bar:nth-child(3) { height: 40%; animation-delay: 0.3s; }
+.music-bars .bar:nth-child(4) { height: 80%; animation-delay: 0.45s; }
+
+@keyframes eq-bar {
+  0%, 100% { transform: scaleY(0.3); }
+  50% { transform: scaleY(1); }
+}
+
+/* Volume Slider */
+.volume-slider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.75rem 0.5rem;
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.music-player:hover .volume-slider,
+.volume-slider.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.volume-slider input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  writing-mode: vertical-lr;
+  direction: rtl;
+  width: 6px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+}
+
+.volume-slider input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  box-shadow: 0 0 8px rgba(124, 58, 237, 0.5);
+  cursor: pointer;
+}
+
+.volume-slider input[type="range"]::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  box-shadow: 0 0 8px rgba(124, 58, 237, 0.5);
+  border: none;
+  cursor: pointer;
+}
+
+.volume-slider input[type="range"]::-moz-range-track {
+  width: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  border: none;
+}
+
+.volume-label {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
 /* =============================================
    ANIMATIONS — Scroll Reveal
    ============================================= */
@@ -1093,25 +1267,26 @@ input, textarea {
 /* Toast Notification */
 .toast {
   position: fixed;
-  bottom: 2rem;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%) translateY(20px);
-  padding: 1rem 2rem;
+  transform: translate(-50%, -50%) scale(0.9);
+  padding: 1.25rem 2.5rem;
   border-radius: var(--radius-md);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 500;
   z-index: 9999;
   opacity: 0;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   max-width: 90%;
   text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
 .toast.visible {
   opacity: 1;
-  transform: translateX(-50%) translateY(0);
+  transform: translate(-50%, -50%) scale(1);
 }
 
 .toast-success {

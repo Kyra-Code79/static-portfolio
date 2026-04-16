@@ -235,13 +235,35 @@
         <p class="footer-text">
           &copy; <span id="footerYear"></span> Habibi. Built with ☕ and Vite.
         </p>
+        <p class="footer-music-credit">
+          🎵 Music: <a href="https://pixabay.com/music/smooth-jazz-jazz-lounge-relaxing-background-music-412597/"
+            target="_blank" rel="noopener">Jazz Lounge</a> by <a
+            href="https://pixabay.com/users/sigmamusicart-36860929/" target="_blank" rel="noopener">SigmaMusicArt</a> —
+          Pixabay License
+        </p>
         <div class="footer-social" id="footerSocial">
           <!-- Populated by JS -->
         </div>
       </div>
     </div>
   </footer>
-
+  <!-- Floating Music Player -->
+  <div class="music-player" id="musicPlayer">
+    <div class="volume-slider" id="volumeSlider">
+      <input type="range" id="volumeRange" min="0" max="100" value="5" orient="vertical" />
+      <span class="volume-label" id="volumeLabel">5%</span>
+    </div>
+    <button class="music-btn" id="musicBtn" aria-label="Toggle music">
+      <span class="music-icon" id="musicIcon">🎵</span>
+      <span class="music-bars" id="musicBars">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </span>
+    </button>
+  </div>
+  <audio id="bgMusic" preload="none" loop></audio>
   <script type="module" src="/src/main.js"></script>
 </body>
 
