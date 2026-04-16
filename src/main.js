@@ -244,22 +244,71 @@ function initContact() {
   document.getElementById('footerYear').textContent = new Date().getFullYear();
 }
 
-/* ---------- Contact Form ---------- */
+/* ---------- Contact Form (Web3Forms) ---------- */
 function initContactForm() {
   const form = document.getElementById('contactForm');
-  form.addEventListener('submit', (e) => {
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const originalBtnText = submitBtn.innerHTML;
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const name = document.getElementById('contactName').value;
-    const email = document.getElementById('contactEmail').value;
-    const message = document.getElementById('contactMessage').value;
 
-    // Simple mailto fallback
-    const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
-    window.location.href = `mailto:${profileData.social.email}?subject=${subject}&body=${body}`;
+    // Loading state
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `
+      <span>Sending...</span>
+      <svg class="spin" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+    `;
 
-    form.reset();
+    const formData = new FormData(form);
+    formData.append('access_key', import.meta.env.VITE_WEB3FORMS_KEY);
+    formData.append('subject', `Portfolio Contact from ${formData.get('name')}`);
+    formData.append('from_name', 'Portfolio Website');
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        showToast('✅ Message sent successfully! I\'ll get back to you soon.', 'success');
+        form.reset();
+      } else {
+        showToast('❌ Failed to send message. Please try again.', 'error');
+      }
+    } catch (error) {
+      showToast('❌ Network error. Please try again later.', 'error');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalBtnText;
+    }
   });
+}
+
+/* ---------- Toast Notification ---------- */
+function showToast(message, type = 'success') {
+  // Remove any existing toast
+  const existing = document.querySelector('.toast');
+  if (existing) existing.remove();
+
+  const toast = document.createElement('div');
+  toast.className = `toast toast-${type}`;
+  toast.textContent = message;
+  document.body.appendChild(toast);
+
+  // Trigger animation
+  requestAnimationFrame(() => {
+    toast.classList.add('visible');
+  });
+
+  // Auto remove
+  setTimeout(() => {
+    toast.classList.remove('visible');
+    setTimeout(() => toast.remove(), 400);
+  }, 4000);
 }
 
 /* ---------- Navbar Scroll & Active States ---------- */
