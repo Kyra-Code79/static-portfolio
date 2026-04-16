@@ -1132,6 +1132,12 @@ button[type="submit"]:disabled {
   cursor: not-allowed;
 }
 
+/* hCaptcha */
+.captcha-container {
+  display: flex;
+  justify-content: center;
+}
+
 /* =============================================
    RESPONSIVE DESIGN
    ============================================= */

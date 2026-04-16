@@ -260,15 +260,30 @@ function initContactForm() {
       <svg class="spin" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
     `;
 
-    const formData = new FormData(form);
-    formData.append('access_key', import.meta.env.VITE_WEB3FORMS_KEY);
-    formData.append('subject', `Portfolio Contact from ${formData.get('name')}`);
-    formData.append('from_name', 'Portfolio Website');
+    // Get hCaptcha token
+    const hCaptchaToken = document.querySelector('[name="h-captcha-response"]')?.value;
+    if (!hCaptchaToken) {
+      showToast('⚠️ Please complete the captcha first.', 'error');
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalBtnText;
+      return;
+    }
+
+    const payload = {
+      access_key: import.meta.env.VITE_WEB3FORMS_KEY,
+      name: document.getElementById('contactName').value,
+      email: document.getElementById('contactEmail').value,
+      message: document.getElementById('contactMessage').value,
+      subject: `Portfolio Contact from ${document.getElementById('contactName').value}`,
+      from_name: 'Portfolio Website',
+      'h-captcha-response': hCaptchaToken,
+    };
 
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        body: formData,
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload),
       });
 
       const result = await response.json();
@@ -277,13 +292,15 @@ function initContactForm() {
         showToast('✅ Message sent successfully! I\'ll get back to you soon.', 'success');
         form.reset();
       } else {
-        showToast('❌ Failed to send message. Please try again.', 'error');
+        showToast(`❌ ${result.message || 'Failed to send message. Please try again.'}`, 'error');
       }
     } catch (error) {
       showToast('❌ Network error. Please try again later.', 'error');
     } finally {
       submitBtn.disabled = false;
       submitBtn.innerHTML = originalBtnText;
+      // Reset captcha for next submission
+      if (typeof hcaptcha !== 'undefined') hcaptcha.reset();
     }
   });
 }
